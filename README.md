@@ -60,6 +60,7 @@ If you don’t have these yet:
 
 Now Run:
 ```bash
+cd ../vagrant
 ./scripts/setup-vagrant-registration.sh
 ```
 
