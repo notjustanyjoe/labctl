@@ -42,7 +42,7 @@ cd labctl
    cd packer
    cp rhel9.pkrvars.hcl.example rhel9.pkrvars.hcl
    # edit iso_path and iso_checksum
-   cd ..
+   vim rhel9.pkrvars.hcl
    ```
 
 ---
