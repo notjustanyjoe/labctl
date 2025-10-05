@@ -1,0 +1,71 @@
+# === Core build artifacts ===
+# ISO images (large, downloaded manually)
+iso/
+packer/iso/
+*.iso
+
+# Packer output directories and box files
+packer/builds/
+builds/
+*.box
+packer_cache/
+output-*/
+
+# Vagrant local state and generated files
+.vagrant/
+.vagrant.d/
+.vagrantplugins
+*.log
+
+# VirtualBox or VMware leftovers
+*.vdi
+*.vmdk
+*.vbox
+*.vbox-prev
+*.vmx
+*.nvram
+*.vmsd
+*.vscode
+*.lck/
+
+# Temporary or transient files
+*~
+*.tmp
+*.swp
+*.bak
+*.orig
+.DS_Store
+Thumbs.db
+
+# Local configuration and environment files
+.env
+.env.*
+secret.json
+*.key
+*.pem
+*.crt
+*.csr
+
+# Python / Ansible cache
+__pycache__/
+*.pyc
+*.retry
+*.facts
+*.molecule/
+
+# Docs build outputs (if using MkDocs/Sphinx later)
+site/
+build/
+dist/
+*.html
+*.pdf
+
+# Editor / IDE directories
+.vscode/
+.idea/
+*.code-workspace
+
+# Optional: OS-specific cruft
+ehthumbs.db
+Icon?
+Desktop.ini
