@@ -1,7 +1,9 @@
 # labctl
 
 Build and manage a local Red Hat Enterprise Linux (RHEL) lab environment for testing and development.  
-This project uses **Packer** to create RHEL base boxes and **Vagrant** to spin up multi-machine environments with optional **Ansible** provisioning.
+
+This project uses **Packer**, **Vagrant**, and **VirtualBox** to automate the creation and management of RHEL virtual machines for a repeatable, local lab setup.  
+Optional provisioning with **Ansible** is supported but not required — the main focus is building and running the lab environment itself.
 
 ---
 
