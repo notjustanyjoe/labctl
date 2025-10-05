@@ -7,14 +7,16 @@ This project uses **Packer** to create RHEL base boxes and **Vagrant** to spin u
 
 ## Requirements
 
-Install the following on your host system:
+The following software must be installed on your local machine before building and running the lab:
 
-- **Packer** ≥ 1.10  
-- **Vagrant** ≥ 2.4  
-- **VirtualBox** ≥ 7.x  
-- (Optional) **Ansible** ≥ 2.14 for provisioning  
+- [Packer](https://www.packer.io/) — used to build RHEL base boxes for Vagrant  
+- [Vagrant](https://www.vagrantup.com/) — used to create and manage the lab VMs  
+- [VirtualBox](https://www.virtualbox.org/) — virtualization provider for the lab environment  
 
-Ensure your user has access to `/dev/vboxdrv` (VirtualBox driver).
+(Optional) [Ansible](https://www.ansible.com/) — used for provisioning and configuration management
+
+You must have a **Red Hat Subscription** to download the RHEL DVD ISO, create an activation key, and access repositories for package installs or updates.  
+If you don’t already have an account, [create one here](https://developers.redhat.com) and accept the terms and conditions of the **Red Hat Developer Program**, which provides no-cost subscriptions for development use only.
 
 ---
 
@@ -27,15 +29,15 @@ cd labctl
 ```
 
 ### 2. Prepare the RHEL ISO
-1. Download the **RHEL DVD ISO** for your desired version (8 or 9) from  
+1. Download the **RHEL DVD ISO** and copy the checksum for your desired version (8 or 9) from  
    [https://access.redhat.com/downloads/content/rhel](https://access.redhat.com/downloads/content/rhel)
-2. While on the download page, copy the **SHA256 checksum**.
-3. Place the ISO under `packer/iso/`:
+   > Click on **Show details** and then copy the **SHA-256 Checksum**.
+2. Place the ISO under `packer/iso/`:
    ```bash
    mkdir -p packer/iso
    mv ~/Downloads/rhel-9.*-x86_64-dvd.iso packer/iso/
    ```
-4. Copy a variable file template and edit it:
+3. Copy a variable file template and edit it:
    ```bash
    cd packer
    cp rhel9.pkrvars.hcl.example rhel9.pkrvars.hcl
@@ -48,10 +50,6 @@ cd labctl
 ### 3. (One-time) Set up Vagrant registration
 Generate a global `~/.vagrant.d/Vagrantfile` and install required plugins.
 
-```bash
-./scripts/setup-vagrant-registration.sh
-```
-
 You’ll be prompted for your **Organization ID** and **Activation Key**.
 
 If you don’t have these yet:
@@ -59,6 +57,11 @@ If you don’t have these yet:
 2. Log in with your Red Hat Developer account.  
 3. Create a key → choose **Role: Workstation**, **SLA: Self-Support**, **Usage: Development/Test**.  
 4. Note your **Organization ID** and **Activation Key Name**.
+
+Now Run:
+```bash
+./scripts/setup-vagrant-registration.sh
+```
 
 ---
 
