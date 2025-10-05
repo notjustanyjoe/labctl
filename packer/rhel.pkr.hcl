@@ -13,6 +13,24 @@ packer {
   }
 }
 
+variable "boot_command" {
+  type = list(string)
+}
+
+variable "firmware" {
+  type    = string
+  default = "efi"   # override to "bios" for RHEL 8/9
+}
+
+variable "memory" {
+  type    = string
+  default = "4096"  # override in var-file if you want
+}
+
+variable "cpus" {
+  type    = string
+  default = "2"
+}
 
 variable "iso_path" {
   type = string
@@ -46,20 +64,28 @@ source "virtualbox-iso" "rhel" {
   iso_url        = var.iso_path
   iso_checksum   = var.iso_checksum
   guest_os_type  = "RedHat_64"
-  headless       = local.headless
+  headless       = true
   http_directory = "http"
-  disk_size      = local.disk_size_mb
+  disk_size      = 15360
 
   ssh_username = var.ssh_user
   ssh_password = var.ssh_pass
   ssh_timeout  = "45m"
 
-  boot_wait = "8s"
-  boot_command = [
-    "<tab> text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter>"
-  ]
+  boot_wait    = "8s"
+  boot_command = var.boot_command
 
-  shutdown_command = "echo '${var.ssh_pass}' | sudo -S /sbin/shutdown -h now"
+  vboxmanage = [
+    ["modifyvm", "{{ .Name }}", "--memory", var.memory],
+    ["modifyvm", "{{ .Name }}", "--cpus",   var.cpus],
+    ["modifyvm", "{{ .Name }}", "--ioapic", "on"],
+    ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
+    ["modifyvm", "{{ .Name }}", "--pae", "on"],
+    ["modifyvm", "{{ .Name }}", "--paravirtprovider", "kvm"],
+    ["modifyvm", "{{ .Name }}", "--graphicscontroller", "vmsvga"],
+    ["modifyvm", "{{ .Name }}", "--accelerate3d", "off"],
+    ["modifyvm", "{{ .Name }}", "--firmware", var.firmware]
+  ]
 }
 
 build {

@@ -2,3 +2,17 @@
 iso_path     = "iso/rhel-9.6-x86_64-dvd.iso"
 iso_checksum = "sha256:<paste_checksum_here>"
 os_version   = "9"
+
+# If firmware is changed to bios from efi, the boot_command must also be changed
+firmware     = "efi"
+memory       = "4096"
+cpus         = "2"
+
+# GRUB 2.06 flow: 'e' to edit, append args, F10 to boot
+boot_command = [
+  "e<wait>",
+  "<down><down>",
+  "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg inst.text",
+  "<wait>",
+  "<f10>"
+]
