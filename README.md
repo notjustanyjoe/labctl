@@ -63,7 +63,7 @@ Now Run:
 cd ../vagrant
 ./scripts/setup-vagrant-registration.sh
 ```
-
+> NOTE: This is only needed the first time you run this project or if your Organization ID/Activation Key changes.
 ---
 
 ### 4. Build the RHEL base box (Packer)
