@@ -26,7 +26,7 @@ If you don’t already have an account, [create one here](https://developers.red
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-user>/labctl.git
+git clone https://github.com/notjustanyjoe/labctl.git
 cd labctl
 ```
 
