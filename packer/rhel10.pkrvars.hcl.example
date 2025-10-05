@@ -8,11 +8,14 @@ firmware     = "efi"
 memory       = "4096"
 cpus         = "2"
 
-# GRUB 2.12 flow: 'e' to edit, append args, F10 to boot
-boot_command = [
-  "e<wait>",
-  "<down><down>",
-  "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg inst.text",
-  "<wait>",
-  "<f10>"
-]
+# RHEL 10 uses a newer kickstart 
+ks_file = "ks10.cfg" 
+
+# Optional: only if GRUB layout differs and you need a tweak. Uncomment if firmware changed to bios.
+#boot_command = [
+#  "e<wait>",
+#  "<down><down><",
+#  "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", "ks10.cfg", inst.text",
+#  "<wait>",
+#  "<f10>"
+#]

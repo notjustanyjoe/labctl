@@ -8,11 +8,12 @@ firmware     = "efi"
 memory       = "4096"
 cpus         = "2"
 
-# GRUB 2.06 flow: 'e' to edit, append args, F10 to boot
-boot_command = [
-  "e<wait>",
-  "<down><down>",
-  "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg inst.text",
-  "<wait>",
-  "<f10>"
-]
+# RHEL 9 uses the shared default: ks.cfg 
+ks_file = "ks.cfg" 
+
+# Optional: Uncomment if firmware changed to bios.
+#boot_command = [
+#    "<tab>",
+#    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", var.ks_file, " inst.text",
+#    "<enter>"
+#]

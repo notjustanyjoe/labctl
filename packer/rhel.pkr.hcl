@@ -13,18 +13,26 @@ packer {
   }
 }
 
-variable "boot_command" {
-  type = list(string)
+# Which Kickstart file to serve from packer/http/
+variable "ks_file" {
+  type    = string
+  default = "ks.cfg" # RHEL 8/9 share this; RHEL 10 can set "ks10.cfg"
+}
+
+# Optional: let var-files fully override the boot flow if needed
+variable "boot_command_override" {
+  type    = list(string)
+  default = []
 }
 
 variable "firmware" {
   type    = string
-  default = "efi"   # override to "bios" for RHEL 8/9
+  default = "efi" # "efi" (default) or "bios"
 }
 
 variable "memory" {
   type    = string
-  default = "4096"  # override in var-file if you want
+  default = "4096" # override in var-file if you want
 }
 
 variable "cpus" {
@@ -72,12 +80,20 @@ source "virtualbox-iso" "rhel" {
   ssh_password = var.ssh_pass
   ssh_timeout  = "45m"
 
-  boot_wait    = "8s"
-  boot_command = var.boot_command
+  boot_wait = "8s"
+  # Default EFI edit flow for all versions; can be overridden via var-file
+  boot_command = length(var.boot_command_override) > 0 ? var.boot_command_override : [
+    "e<wait>",
+    "<down><down>",
+    # Append KS + text-mode; use the selected Kickstart file
+    "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", var.ks_file, " inst.text",
+    "<wait>",
+    "<f10>"
+  ]
 
   vboxmanage = [
     ["modifyvm", "{{ .Name }}", "--memory", var.memory],
-    ["modifyvm", "{{ .Name }}", "--cpus",   var.cpus],
+    ["modifyvm", "{{ .Name }}", "--cpus", var.cpus],
     ["modifyvm", "{{ .Name }}", "--ioapic", "on"],
     ["modifyvm", "{{ .Name }}", "--rtcuseutc", "on"],
     ["modifyvm", "{{ .Name }}", "--pae", "on"],
@@ -86,6 +102,8 @@ source "virtualbox-iso" "rhel" {
     ["modifyvm", "{{ .Name }}", "--accelerate3d", "off"],
     ["modifyvm", "{{ .Name }}", "--firmware", var.firmware]
   ]
+
+  shutdown_command = "echo '${var.ssh_pass}' | sudo -S /sbin/shutdown -h now"
 }
 
 build {
