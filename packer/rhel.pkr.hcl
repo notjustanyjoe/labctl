@@ -6,8 +6,13 @@ packer {
       source  = "github.com/hashicorp/virtualbox"
       version = ">= 1.0.0"
     }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = ">= 1.0.0"
+    }
   }
 }
+
 
 variable "iso_path" {
   type = string
