@@ -43,6 +43,7 @@ cd labctl
    cp rhel9.pkrvars.hcl.example rhel9.pkrvars.hcl
    # edit iso_path and iso_checksum
    vim rhel9.pkrvars.hcl
+   cd ..
    ```
 
 ---
@@ -60,7 +61,6 @@ If you don’t have these yet:
 
 Now Run:
 ```bash
-cd ../vagrant
 ./scripts/setup-vagrant-registration.sh
 ```
 > NOTE: This is only needed the first time you run this project or if your Organization ID/Activation Key changes.
