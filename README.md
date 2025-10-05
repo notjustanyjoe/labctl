@@ -68,7 +68,7 @@ Now Run:
 
 ### 4. Build the RHEL base box (Packer)
 ```bash
-cd ../packer
+cd packer
 packer fmt .
 packer init .
 packer validate -var-file=rhel9.pkrvars.hcl rhel.pkr.hcl
@@ -126,23 +126,29 @@ This unregisters all VMs from RHSM and removes them cleanly.
 ```
 labctl/
 ├── ansible/
-│   ├── inventories/
-│   │   └── vagrant.ini
-│   └── playbooks/
-│       └── common.yml
+│ ├── inventories/
+│ │ └── vagrant.ini
+│ └── playbooks/
+│ └── common.yml
 ├── packer/
-│   ├── http/
-│   │   └── ks.cfg
-│   ├── iso/
-│   ├── scripts/
-│   │   ├── prepare.sh
-│   │   └── cleanup.sh
-│   ├── builds/
-│   └── rhel.pkr.hcl
+│ ├── builds/
+│ ├── http/
+│ │ ├── ks.cfg
+│ │ └── (future ks10.cfg)
+│ ├── iso/
+│ ├── scripts/
+│ │ ├── prepare.sh
+│ │ └── cleanup.sh
+│ ├── rhel.pkr.hcl
+│ ├── rhel8.pkrvars.hcl.example
+│ ├── rhel9.pkrvars.hcl.example
+│ └── rhel10.pkrvars.hcl.example
 ├── vagrant/
-│   └── Vagrantfile
-└── scripts/
-    └── setup-vagrant-registration.sh
+│ └── Vagrantfile
+├── scripts/
+│ └── setup-vagrant-registration.sh
+├── vagrant-plugins.list
+└── README.md
 ```
 
 ---
