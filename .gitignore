@@ -11,6 +11,11 @@ builds/
 packer_cache/
 output-*/
 
+# === Packer variable files ===
+# Ignore all real var-files but keep example templates
+packer/*.pkrvars.hcl
+!packer/*.pkrvars.hcl.example
+
 # Vagrant local state and generated files
 .vagrant/
 .vagrant.d/
