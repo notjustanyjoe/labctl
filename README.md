@@ -68,7 +68,7 @@ cd ../vagrant
 
 ### 4. Build the RHEL base box (Packer)
 ```bash
-cd packer
+cd ../packer
 packer fmt .
 packer init .
 packer validate -var-file=rhel9.pkrvars.hcl rhel.pkr.hcl
@@ -151,6 +151,7 @@ labctl/
 - The default Packer and Vagrant settings use **EFI**, 4 GB RAM, and 2 vCPUs.
 - Boxes are automatically registered/unregistered via the `vagrant-registration` plugin.
 - This project is intended for **development and testing only** (self-support SLA).
+- **Tested and verified working with:** **RHEL 8** and **RHEL 9**. (RHEL 10 support in progress)
 
 ---
 
