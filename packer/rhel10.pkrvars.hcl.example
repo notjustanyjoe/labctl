@@ -12,10 +12,10 @@ cpus         = "2"
 ks_file = "ks10.cfg" 
 
 # Optional: only if GRUB layout differs and you need a tweak. Uncomment if firmware changed to bios.
-#boot_command = [
+#boot_command_override = [
 #  "e<wait>",
 #  "<down><down><",
-#  "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", "ks10.cfg", inst.text",
+#  "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks10.cfg inst.text",
 #  "<wait>",
 #  "<f10>"
 #]

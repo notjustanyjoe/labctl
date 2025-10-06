@@ -86,7 +86,7 @@ source "virtualbox-iso" "rhel" {
     "e<wait>",
     "<down><down>",
     # Append KS + text-mode; use the selected Kickstart file
-    "<end> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", var.ks_file, " inst.text",
+    "<end><bs><bs><bs><bs><bs> inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", var.ks_file, " inst.text",
     "<wait>",
     "<f10>"
   ]

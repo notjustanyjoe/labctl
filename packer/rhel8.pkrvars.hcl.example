@@ -12,8 +12,8 @@ cpus         = "2"
 ks_file = "ks.cfg" 
 
 # Optional: Uncomment if firmware changed to bios.
-#boot_command = [
+#boot_command_override = [
 #    "<tab>",
-#    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/", var.ks_file, " inst.text",
+#    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg inst.text",
 #    "<enter>"
 #]
